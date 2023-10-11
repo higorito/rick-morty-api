@@ -31,8 +31,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomePage'),
+        title: const Text('HomePage', style: TextStyle(letterSpacing: 4)),
         centerTitle: true,
+        elevation: 2,
       ),
       body: AnimatedBuilder(
         animation: Listenable.merge([
