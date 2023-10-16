@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_morty_boaspraticas/app/data/http/http_client.dart';
+import 'package:rick_morty_boaspraticas/app/pages/detalhes/detalhes_page.dart';
 import 'package:rick_morty_boaspraticas/app/pages/home/estado/personagem_estado.dart';
 
 import '../../data/repositories/personagem_repository.dart';
@@ -55,10 +56,54 @@ class _HomePageState extends State<HomePage> {
               itemCount: estado.estado.value.length,
               itemBuilder: (BuildContext context, int index) {
                 final personagem = estado.estado.value[index];
-                return ListTile(
-                  leading: Image.network(personagem.image),
-                  title: Text(personagem.name),
-                  subtitle: Text(personagem.status),
+                return Container(
+                  margin: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        // blurRadius: 1,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                    leading: Image.network(
+                      personagem.image,
+                    ),
+                    title: Text(
+                      personagem.name,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    subtitle: (personagem.status == 'Alive')
+                        ? Text(
+                            personagem.status,
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 16,
+                            ),
+                          )
+                        : Text(
+                            personagem.status,
+                            style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 16,
+                            ),
+                          ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return DetalhesPage(
+                            personagem: estado.estado.value[index],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 );
               },
             );
