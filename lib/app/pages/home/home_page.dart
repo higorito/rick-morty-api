@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rick_morty_boaspraticas/app/data/http/http_client.dart';
 import 'package:rick_morty_boaspraticas/app/pages/detalhes/detalhes_page.dart';
-import 'package:rick_morty_boaspraticas/app/pages/home/estado/personagem_estado.dart';
+import 'package:rick_morty_boaspraticas/app/pages/home/controller/personagem_estado.dart';
 
 import '../../data/repositories/personagem_repository.dart';
 
@@ -76,7 +76,9 @@ class _HomePageState extends State<HomePage> {
                     title: Text(
                       personagem.name,
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.black),
                     ),
                     subtitle: (personagem.status == 'Alive')
                         ? Text(
@@ -93,6 +95,13 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 16,
                             ),
                           ),
+                    trailing: Icon(
+                      //AQ VOU CRIAR A LOGICA DE FAVORITAR DEPOIS
+                      (personagem.species == "Human")
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined,
+                      color: Colors.redAccent,
+                    ),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
